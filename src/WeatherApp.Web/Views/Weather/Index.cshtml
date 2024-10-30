@@ -1,0 +1,12 @@
+﻿@model string
+<h2>Check Weather</h2>
+<form method="post" asp-action="GetWeather">
+    <label>Enter City or Cities (separated by commas):</label>
+    <input type="text" name="cities" required />
+    <button type="submit">Get Weather</button>
+</form>
+
+@if (ViewData["Message"] != null)
+{
+    <p>@ViewData["Message"]</p>
+}

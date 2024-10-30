@@ -1,0 +1,13 @@
+﻿@model List<WeatherApp.Web.Models.WeatherViewModel>
+
+<h2>Weather Information</h2>
+
+@foreach (var result in Model)
+{
+    <div>
+        <h3>@result.City</h3>
+        <p>Average Temperature: @(result.AverageTemperature.HasValue ? $"{result.AverageTemperature.Value}°C" : "Data unavailable")</p>
+    </div>
+}
+
+<a asp-action="Index">Back to Search</a>

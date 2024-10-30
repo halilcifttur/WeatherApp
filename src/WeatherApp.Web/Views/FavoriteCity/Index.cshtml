@@ -1,0 +1,49 @@
+﻿@model WeatherApp.Web.Models.FavoriteCitiesViewModel
+
+<h2>Your Favorite Cities</h2>
+
+@if (Model.FavoriteCities != null && Model.FavoriteCities.Count > 0)
+{
+    <ul>
+        @foreach (var city in Model.FavoriteCities)
+        {
+            <li>
+                <strong>@city.CityName</strong> - Average Temperature: @(city.AverageTemperature.HasValue ? $"{city.AverageTemperature.Value}°C" : "Data unavailable")
+                <form method="post" asp-action="RemoveFavoriteCity">
+                    <input type="hidden" name="favoriteCityId" value="@city.FavoriteCityId" />
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+        }
+    </ul>
+}
+
+<h3>Hottest City</h3>
+@if (Model.HottestCity != null)
+{
+    <p>
+        <strong>@Model.HottestCity.CityName</strong> - Temperature: @Model.HottestCity.AverageTemperature°C
+    </p>
+}
+else
+{
+    <p>No data available</p>
+}
+
+<h3>Coldest City</h3>
+@if (Model.ColdestCity != null)
+{
+    <p>
+        <strong>@Model.ColdestCity.CityName</strong> - Temperature: @Model.ColdestCity.AverageTemperature°C
+    </p>
+}
+else
+{
+    <p>No data available</p>
+}
+
+<form method="post" asp-action="AddFavoriteCity">
+    <label>Add City to Favorites with Name:</label>
+    <input type="text" name="name" required />
+    <button type="submit">Add to Favorites</button>
+</form>

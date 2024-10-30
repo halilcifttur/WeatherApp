@@ -1,0 +1,30 @@
+﻿@model List<WeatherApp.Web.Models.CityViewModel>
+
+<h2>Add City</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <ul>
+        @foreach (var city in Model)
+        {
+            <li>
+                @city.CityName
+                <form method="post" asp-action="RemoveCity">
+                    <input type="hidden" name="cityId" value="@city.CityId" />
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+        }
+    </ul>
+}
+
+<form method="post" asp-action="AddCity">
+    <label>Enter a City Name:</label>
+    <input type="text" name="name" required />
+    <button type="submit">Add City</button>
+</form>
+
+@if (ViewData["Message"] != null)
+{
+    <p>@ViewData["Message"]</p>
+}

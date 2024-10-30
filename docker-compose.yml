@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  weatherapp.database:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: weatherdb
+      POSTGRES_USER: weatherapp
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.containers/weather-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U weatherapp"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  weatherapp.cache:
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  weatherapp.web:
+    build:
+      context: .
+      dockerfile: src/WeatherApp.Web/Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=weatherapp.database;Port=5432;Database=weatherdb;Username=weatherapp;Password=secret
+    depends_on:
+      weatherapp.database:
+        condition: service_healthy
+      weatherapp.cache:
+        condition: service_healthy

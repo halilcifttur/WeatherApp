@@ -42,7 +42,6 @@ UserSecrets/
 
 # Ignore Docker-related files and folders
 .docker/
-docker-compose.override.yml
 **/Dockerfile
 containers/
 .dockerignore

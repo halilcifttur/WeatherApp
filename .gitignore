@@ -1,0 +1,100 @@
+# Ignore build and output folders
+bin/
+obj/
+
+# Ignore Visual Studio and Rider specific files
+.vscode/
+.idea/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.bak
+*.log
+*.old
+
+# Ignore compiled DLLs and EXEs
+*.dll
+*.exe
+*.pdb
+
+# Ignore NuGet packages
+*.nupkg
+packages/
+.nuget/
+
+# Ignore user-specific files
+*.rsuser
+*.sln.docstates
+*.userprefs
+*.dbmdl
+*.dbproj.user
+
+# Ignore local secrets and sensitive files
+appsettings.Development.json
+secrets.json
+UserSecrets/
+
+# Ignore Docker-related files and folders
+.docker/
+docker-compose.override.yml
+**/Dockerfile
+containers/
+.dockerignore
+
+# Ignore persistent database files and cache
+containers/weather-db/
+redis.conf
+
+# Ignore generated files and logs
+logs/
+**/logs/
+**/*.log
+
+# Ignore build output folders in each project
+src/**/bin/
+src/**/obj/
+test/**/bin/
+test/**/obj/
+
+# Ignore IDE-specific settings
+*.DS_Store
+*.idea/
+
+# Ignore test and build artifacts
+TestResults/
+coverage/
+
+# Ignore temporary files and other artifacts
+*.tmp
+*.swp
+*.swo
+*.orig
+
+# Ignore Node.js artifacts (if any front-end)
+node_modules/
+dist/
+build/
+
+# Ignore database backup files
+*.sql
+
+# Ignore system-generated files
+Thumbs.db
+ehthumbs.db
+.DS_Store
+
+# Ignore configuration files
+launchSettings.json
+
+# Ignore generated files by Entity Framework Core migrations
+Migrations/
+
+# Ignore any hidden files and folders except for .gitignore
+.*
+!.gitignore
